@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Random</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        h1 {
+            color: #ff0000;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #cc0000;
+        }
+        #pokemon-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .pokemon-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 150px;
+        }
+        .pokemon-card img {
+            width: 100px;
+            height: 100px;
+        }
+        .pokemon-card p {
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: capitalize;
+            margin: 10px 0 0 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>5 Random Pokemon</h1>
+    <button onclick="getRandomPokemon()">Get Pokemon!</button>
+    <div id="pokemon-container"></div>
+
+    <script>
+        // Get random number
+        function getRandomNumber() {
+            return Math.floor(Math.random() * 151) + 1;
+        }
+
+        // Get one pokemon from API
+        async function getPokemon(id) {
+            // Use proxy to fix CORS error
+            let proxy = "https://corsproxy.io/?";
+            let url = proxy + "https://pokeapi.co/api/v2/pokemon/" + id;
+            //let url = "https://pokeapi.co/api/v2/pokemon/" + id;
+            let response = await fetch(url);
+            let data = await response.json();
+            return data;
+        }
+
+        // Show pokemon on screen
+        function showPokemon(pokemon) {
+            let container = document.getElementById("pokemon-container");
+            
+            let card = document.createElement("div");
+            card.className = "pokemon-card";
+            
+            let img = document.createElement("img");
+            img.src = pokemon.sprites.front_default;
+            
+            let name = document.createElement("p");
+            name.innerText = pokemon.name;
+            
+            card.appendChild(img);
+            card.appendChild(name);
+            container.appendChild(card);
+        }
+
+        // Main function
+        async function getRandomPokemon() {
+            let container = document.getElementById("pokemon-container");
+            container.innerHTML = "";
+            
+            // Get 5 random pokemon
+            for (let i = 0; i < 5; i++) {
+                let id = getRandomNumber();
+                let pokemon = await getPokemon(id);
+                showPokemon(pokemon);
+            }
+        }
+    </script>
+</body>
+</html>

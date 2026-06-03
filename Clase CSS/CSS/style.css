@@ -1,0 +1,30 @@
+body{
+    background-color: bisque;
+}
+
+div{
+    margin: 0 auto;
+    width: 50%;
+    border: 10 px solid gray;
+    margin-top: 10px;
+    padding: 20px;
+}
+
+h1{
+    color: black;
+    text-align: center;
+    border-bottom: 1px solid green;
+    font-family: "Arial";
+}
+h5{
+    color:indigo;
+    font-family: sans-serif;
+}
+p{
+    color:#141414;
+    text-align: justify;
+    font-family: Helvetica;
+}
+a:link{ color:darkmagenta;}
+a:hover{ background-color: gray; color:white}
+a:visited{ color:blue;}

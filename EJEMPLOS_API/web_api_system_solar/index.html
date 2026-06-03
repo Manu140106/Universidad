@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Solar - Planetas Aleatorios</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a2e 0%, #1a1a4e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 0 0 20px rgba(100, 150, 255, 0.5);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        button {
+            display: block;
+            margin: 0 auto 30px;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #4a90d9 0%, #6b5bdf 100%);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(107, 91, 223, 0.4);
+        }
+        .planets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .planet-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .planet-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        .planet-name {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #7eb8ff;
+        }
+        .planet-info {
+            display: grid;
+            gap: 10px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .info-label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .info-value {
+            font-weight: bold;
+            color: #fff;
+        }
+        .loading {
+            text-align: center;
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .token-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .token-container input {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            width: 300px;
+            outline: none;
+        }
+        .token-container input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .token-container input:focus {
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🪐 Sistema Solar</h1>
+        <div class="token-container">
+            <input type="text" id="apiToken" placeholder="Ingresa tu token de API">
+        </div>
+        <button onclick="fetchPlanets()">Obtener 5 Planetas Aleatorios</button>
+        <div id="planetsContainer" class="planets-grid"></div>
+    </div>
+
+    <script>
+        async function fetchPlanets() {
+            const container = document.getElementById('planetsContainer');
+            const token = document.getElementById('apiToken').value.trim();
+            container.innerHTML = '<p class="loading">Cargando planetas...</p>';
+
+            const headers = {};
+            if (token) {
+                headers['authorization'] = `Bearer ${token}`;
+            }
+
+            try {
+                let proxy = "https://corsproxy.io/?";
+                let url = proxy + "https://api.le-systeme-solaire.net/rest/bodies/";
+                //let url = "https://api.le-systeme-solaire.net/rest/bodies/";
+                const response = await fetch(url, { headers });
+                
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                const planets = data.bodies.filter(body => body.isPlanet === true);
+                
+                const shuffled = planets.sort(() => 0.5 - Math.random());
+                const randomPlanets = shuffled.slice(0, 5);
+                
+                displayPlanets(randomPlanets);
+                
+            } catch (error) {
+                container.innerHTML = `<p class="loading">Error: ${error.message}</p>`;
+            }
+        }
+
+        function displayPlanets(planets) {
+            const container = document.getElementById('planetsContainer');
+            container.innerHTML = '';
+
+            planets.forEach(planet => {
+                const card = document.createElement('div');
+                card.className = 'planet-card';
+                card.innerHTML = `
+                    <h2 class="planet-name">${planet.englishName}</h2>
+                    <div class="planet-info">
+                        <div class="info-row">
+                            <span class="info-label">Tipo</span>
+                            <span class="info-value">${planet.bodyType || 'Desconocido'}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Eje Semi-Mayor</span>
+                            <span class="info-value">${planet.semimajorAxis ? planet.semimajorAxis.toLocaleString() + ' km' : 'N/A'}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Período Orbital</span>
+                            <span class="info-value">${planet.sideralOrbit ? planet.sideralOrbit + ' días' : 'N/A'}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Rotación Sideral</span>
+                            <span class="info-value">${planet.sideralRotation ? planet.sideralRotation + ' horas' : 'N/A'}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Masa</span>
+                            <span class="info-value">${planet.mass ? planet.mass.massValue + ' ×10²² kg' : 'N/A'}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Densidad</span>
+                            <span class="info-value">${planet.density ? planet.density + ' g/cm³' : 'N/A'}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Gravedad</span>
+                            <span class="info-value">${planet.gravity ? planet.gravity + ' m/s²' : 'N/A'}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Temperatura</span>
+                            <span class="info-value">${planet.avgTemp ? planet.avgTemp + ' K' : 'N/A'}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Lunas</span>
+                            <span class="info-value">${planet.moons ? planet.moons.length : 0}</span>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+services:
+  servicio_auth:
+    image: alpine
+    container_name: servicio_auth
+    command: sleep infinity
+    networks:
+      red_microservicios:
+        ipv4_address: 10.10.0.20
+
+networks:
+  red_microservicios: 
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.0.0/16
+          gateway: 10.10.0.1

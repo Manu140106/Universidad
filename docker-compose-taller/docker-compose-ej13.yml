@@ -1,0 +1,35 @@
+services:
+  app:
+    build:
+      context: .
+      args:
+        ENV: production
+
+    image: app_final:v1
+    container_name: app_container
+
+    ports:
+      - "9000:8000"
+
+    environment:
+      - MODE=prod
+
+    volumes:
+      - datos_app:/app/data
+
+    networks:
+      red_proyecto:
+        ipv4_address: 172.25.0.10
+
+    restart: always
+
+volumes:
+  datos_app:
+
+networks:
+  red_proyecto:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
+          gateway: 172.25.0.1 

@@ -1,0 +1,10 @@
+services:
+  mysql_db:
+    image: mysql
+    container_name: mysql_db
+    volumes:
+      - datos_mysql:/var/lib/mysql
+    restart: always
+
+volumes: 
+  datos_mysql:

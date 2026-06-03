@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harry Potter API</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero">
+      <p class="eyebrow">Proyecto web + API</p>
+      <h1>Harry Potter</h1>
+      <p class="subtitle">Una experiencia inspirada en Hogwarts que consume una API local con personajes del mundo mágico.</p>
+      <div class="hero-actions">
+        <a href="http://localhost:3000/api" target="_blank" rel="noreferrer">Ver API</a>
+        <button id="reloadBtn" type="button">Recargar personajes</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2>Personajes</h2>
+        <span id="status">Cargando...</span>
+      </div>
+      <div class="controls">
+        <input id="searchInput" type="search" placeholder="Buscar personaje..." aria-label="Buscar personaje" />
+        <select id="houseFilter" aria-label="Filtrar por casa">
+          <option value="all">Todas las casas</option>
+          <option value="Gryffindor">Gryffindor</option>
+          <option value="Slytherin">Slytherin</option>
+          <option value="Ravenclaw">Ravenclaw</option>
+          <option value="Hufflepuff">Hufflepuff</option>
+        </select>
+      </div>
+      <div id="characterGrid" class="grid"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

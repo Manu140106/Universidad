@@ -1,0 +1,88 @@
+{
+  "characters": [
+    {
+      "id": 1,
+      "name": "Harry Potter",
+      "house": "Gryffindor",
+      "image": "https://cdn.shopify.com/s/files/1/1943/7257/files/Harry-Potter_large_0dad831f-4b4a-4db5-b0eb-f96e70436102_large.jpg?v=1514443105",
+      "description": "El niño que sobrevivió."
+    },
+    {
+      "id": 2,
+      "name": "Hermione Granger",
+      "house": "Gryffindor",
+      "image": "https://static.wikia.nocookie.net/esharrypotter/images/1/14/Hermione-Granger-Photoshoot-OOTP-hermione-granger-1354671-1919-2560.jpg/revision/latest/scale-to-width-down/985?cb=20100801233654",
+      "description": "La estudiante más brillante de Hogwarts."
+    },
+    {
+      "id": 3,
+      "name": "Ron Weasley",
+      "house": "Gryffindor",
+      "image": "https://i.pinimg.com/236x/a3/17/cb/a317cb47ff750de68a1c77ad97944c07.jpg",
+      "description": "Leal amigo de Harry y Hermione."
+    },
+    {
+      "id": 4,
+      "name": "Draco Malfoy",
+      "house": "Slytherin",
+      "image": "https://i.pinimg.com/474x/37/b5/56/37b556100538dfaf84824253181c9c88.jpg",
+      "description": "Rival de Harry en Hogwarts."
+    },
+    {
+      "id": 5,
+      "name": "Luna Lovegood",
+      "house": "Ravenclaw",
+      "image": "https://i.pinimg.com/736x/19/92/b5/1992b528a5e70e3ac31ac83ef98d9499.jpg",
+      "description": "Misteriosa, inteligente y muy singular."
+    },
+    {
+      "id": 6,
+      "name": "Neville Longbottom",
+      "house": "Gryffindor",
+      "image": "https://w0.peakpx.com/wallpaper/769/253/HD-wallpaper-matthew-deathly-harry-lewis-neville-order-phoenix-potter.jpg",
+      "description": "Su valentía crece a lo largo de la saga."
+    },
+    {
+      "id": 7,
+      "name": "Ginny Weasley",
+      "house": "Gryffindor",
+      "image": "https://static.wikia.nocookie.net/esharrypotter/images/e/ea/DH-ginevra-ginny-weasley-19126276-605-807.jpg/revision/latest?cb=20171221181839",
+      "description": "Fuerte, decidida y muy capaz en la magia."
+    },
+    {
+      "id": 8,
+      "name": "Cedric Diggory",
+      "house": "Hufflepuff",
+      "image": "https://static.wikia.nocookie.net/esharrypotter/images/c/cf/Cedric-Diggory-promo-pics-hufflepuff-28197938-365-520.jpg/revision/latest/thumbnail/width/360/height/360?cb=20150523213517",
+      "description": "Campeón de Hufflepuff y gran ejemplo de honor."
+    },
+    {
+      "id": 9,
+      "name": "Severus Snape",
+      "house": "Slytherin",
+      "image": "https://upload.wikimedia.org/wikipedia/en/b/b9/Otto_Snape.jpg",
+      "description": "Profesor severo con un pasado complejo."
+    },
+    {
+      "id": 10,
+      "name": "Albus Dumbledore",
+      "house": "Gryffindor",
+      "image": "https://upload.wikimedia.org/wikipedia/en/d/d8/Dumbledore.jpg",
+      "description": "Director de Hogwarts y gran mago."
+    },
+    {
+      "id": 11,
+      "name": "Rubeus Hagrid",
+      "house": "Gryffindor",
+      "image": "https://upload.wikimedia.org/wikipedia/en/1/10/Rubeus_Hagrid.png",
+      "description": "Guardián de las llaves y amigo de los animales mágicos."
+    },
+    {
+      "id": 12,
+      "name": "Minerva McGonagall",
+      "house": "Gryffindor",
+      "image": "https://upload.wikimedia.org/wikipedia/en/6/63/Minerva_McGonagall.png",
+      "description": "Profesora estricta y poderosa en transfiguración."
+    }
+  ]
+}

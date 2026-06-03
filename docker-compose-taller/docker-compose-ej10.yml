@@ -1,0 +1,8 @@
+services:
+  app_node:
+    build:
+      context: .
+      args:
+        APP_ENV: production
+    image: app_node:v1
+    container_name: app_node_container
